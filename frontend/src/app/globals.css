@@ -1,52 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 251 251 250;
-    --foreground: 24 24 27;
+    --bg-paper: #EBE5D8;
+    --paper-card: #FFFDF8;
+    --border-ink: #1A1A1A;
+    --blueprint: #0B43DC;
+    --safety-orange: #FF4D2D;
   }
 
   html {
     scroll-behavior: smooth;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    background-color: #EBE5D8;
   }
 
   body {
-    background-color: #FBFBFA;
-    color: #18181B;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+    background-color: #EBE5D8;
+    color: #1A1A1A;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   ::selection {
-    background-color: #F3D5C9;
-    color: #842F13;
+    background-color: #0B43DC;
+    color: #FFFFFF;
   }
 }
 
-/* Custom scrollbar */
+/* Drafting Graph Paper Grid Pattern */
+.bg-drafting-grid {
+  background-color: #EBE5D8;
+  background-image: 
+    linear-gradient(to right, rgba(26, 26, 26, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 26, 26, 0.055) 1px, transparent 1px),
+    linear-gradient(to right, rgba(26, 26, 26, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 26, 26, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+}
+
+/* Deep Blueprint Navy Grid Pattern */
+.bg-blueprint-grid {
+  background-color: #0D1B40;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to right, rgba(11, 67, 220, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 67, 220, 0.25) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+}
+
+/* Subtle Vignette Ambient Shadow */
+.paper-vignette {
+  box-shadow: inset 0 0 100px rgba(180, 168, 146, 0.25);
+}
+
+/* Technical Blueprint Registration Marks */
+.corner-cross {
+  position: relative;
+}
+.corner-cross::before,
+.corner-cross::after {
+  content: "";
+  position: absolute;
+  background-color: #1A1A1A;
+}
+
+/* Hand-annotated Draft Stamped Badge */
+.draft-stamp {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #1A1A1A;
+  background-color: #FFFDF8;
+  padding: 0.15rem 0.5rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transform: rotate(-1.5deg);
+  box-shadow: 1px 1px 0px #1A1A1A;
+}
+
+/* Technical Drafting Corner Brackets */
+.technical-frame {
+  position: relative;
+}
+.technical-frame::before {
+  content: "+";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  line-height: 1;
+  color: #1A1A1A;
+  pointer-events: none;
+}
+.technical-frame::after {
+  content: "+";
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  line-height: 1;
+  color: #1A1A1A;
+  pointer-events: none;
+}
+
+/* Pulse animation for live indicators */
+@keyframes blueprint-scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.animate-scanline {
+  animation: blueprint-scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Custom Scrollbar for drafting aesthetic */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F5F4F0;
+  background: #EBE5D8;
+  border-left: 1px solid rgba(26, 26, 26, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4D2C9;
-  border-radius: 4px;
+  background: #C4BCAC;
+  border-radius: 0px;
+  border: 1px solid #1A1A1A;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8B5AA;
+  background: #0B43DC;
 }
 
-/* Tabular figures for numbers */
+/* Tabular figures for data tables & metrics */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }

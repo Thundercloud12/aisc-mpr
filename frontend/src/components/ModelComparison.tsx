@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Cpu, ExternalLink, Sparkles, Layers, Shield, Hash, Zap, HelpCircle } from "lucide-react";
-import { BenchmarkData, ModelData } from "@/types/benchmark";
+import { Cpu, ExternalLink, Sparkles, Layers, Shield, Hash, Zap, BookOpen } from "lucide-react";
+import { BenchmarkData } from "@/types/benchmark";
 
 interface ModelComparisonProps {
   data: BenchmarkData;
@@ -12,21 +12,20 @@ export function ModelComparison({ data }: ModelComparisonProps) {
   const models = data.models || [];
 
   return (
-    <section id="models" className="border-b border-border py-16 sm:py-24 bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="models" className="border-b border-ink/20 py-16 sm:py-24 bg-paper/40">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl">
-          <div className="flex items-center gap-2 text-xs font-mono font-medium text-accent uppercase tracking-wider">
-            <Cpu className="h-3.5 w-3.5" />
-            <span>Section 02 // Evaluated Cohort</span>
+          <div className="draft-stamp text-ink mb-4">
+            <span className="text-safety mr-1.5 font-bold">●</span>
+            <span>SECTION 02 // ARCHITECTURAL SPECIFICATIONS</span>
           </div>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-normal tracking-tight text-charcoal-heading">
-            Architectural Cohort Specifications
+          <h2 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-ink">
+            Evaluated Candidate Cohort
           </h2>
-          <p className="mt-4 text-base text-charcoal-body leading-relaxed">
-            The study compares three distinct small language model paradigms: a compact base foundation
-            completion model, an efficiency-optimized generalist instruction model, and an Indian-law-specialized
-            statutory reform model.
+          <p className="mt-3 font-sans text-base text-ink-body leading-relaxed">
+            Comparing three divergent small language model architectures: an unaligned compact foundation
+            base, a general-purpose instruction-aligned model, and a domain-specialized statutory model.
           </p>
         </div>
 
@@ -34,110 +33,94 @@ export function ModelComparison({ data }: ModelComparisonProps) {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           {models.map((model, idx) => {
             const isBase = !model.is_instruct;
-            const isFallback = model.name.toLowerCase().includes("fallback");
-            const metrics = model.metrics || {};
+            const isWinner = model.id === "model_2";
 
             return (
               <div
                 key={model.id || idx}
-                className="relative rounded-xl border border-border bg-surface p-6 shadow-card transition-all hover:shadow-elevated hover:border-accent/50 flex flex-col justify-between"
+                className={`relative rounded-xl border border-ink bg-paper-card p-6 shadow-solid transition-all flex flex-col justify-between ${
+                  isWinner ? "ring-2 ring-blueprint" : ""
+                }`}
               >
                 <div>
                   {/* Top Header Badge */}
-                  <div className="flex items-center justify-between pb-4 border-b border-border">
-                    <span className="font-mono text-xs font-semibold text-accent">
-                      Candidate 0{idx + 1}
+                  <div className="flex items-center justify-between pb-4 border-b border-ink/15">
+                    <span className="font-mono text-xs font-bold text-ink-muted">
+                      CANDIDATE 0{idx + 1}
                     </span>
                     <span
-                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium ${
+                      className={`inline-flex items-center rounded px-2 py-0.5 font-mono text-[11px] font-bold ${
                         isBase
-                          ? "bg-amber-50 text-amber-800 border border-amber-200"
-                          : "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                          ? "border border-ink/40 bg-paper-subtle text-ink"
+                          : "border border-blueprint bg-blueprint text-white"
                       }`}
                     >
-                      {model.instruction_tuned || (isBase ? "Base Foundation" : "Instruction-Tuned")}
+                      {model.instruction_tuned || (isBase ? "Base Foundation" : "Instruct-Tuned")}
                     </span>
                   </div>
 
-                  {/* Title & Parameter Count */}
+                  {/* Model Name & Architecture */}
                   <div className="mt-4">
-                    <h3 className="font-serif text-xl font-medium text-charcoal-heading">
+                    <h3 className="font-sans text-xl font-bold text-ink">
                       {model.name}
                     </h3>
-                    <p className="font-mono text-xs text-charcoal-muted mt-1">
-                      {model.hf_id || model.id}
-                    </p>
-                  </div>
-
-                  {/* Quick Highlight Box */}
-                  <div className="mt-4 rounded-lg bg-surface-subtle p-3.5 border border-border/60 text-xs">
-                    <div className="flex justify-between py-1">
-                      <span className="text-charcoal-muted">Parameter Scale</span>
-                      <span className="font-mono font-semibold text-charcoal">{model.param_count}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-t border-border/40">
-                      <span className="text-charcoal-muted">Domain Profile</span>
-                      <span className="font-medium text-charcoal">{model.domain || "General"}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-t border-border/40">
-                      <span className="text-charcoal-muted">Architecture</span>
-                      <span className="font-mono text-charcoal">{model.architecture || "CausalLM"}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-t border-border/40">
-                      <span className="text-charcoal-muted">Precision / Device</span>
-                      <span className="font-mono text-charcoal">{model.precision || "bfloat16"} ({model.device || "GPU"})</span>
+                    <div className="mt-1 flex items-center gap-2 font-mono text-xs text-ink-muted">
+                      <span>{model.param_count} Parameters</span>
+                      <span>•</span>
+                      <span>{model.architecture || "CausalLM"}</span>
                     </div>
                   </div>
 
-                  {/* Architectural Details Grid */}
-                  <div className="mt-4 grid grid-cols-2 gap-2 text-[11px]">
-                    <div className="rounded border border-border/80 bg-background px-2.5 py-1.5">
-                      <span className="text-charcoal-muted block">Hidden Dimension</span>
-                      <span className="font-mono font-medium text-charcoal">{model.hidden_size || "N/A"}</span>
+                  {/* Parameter Count Box */}
+                  <div className="mt-5 rounded-lg border border-ink/20 bg-paper-subtle/70 p-3 font-mono">
+                    <div className="flex items-center justify-between text-xs text-ink-muted mb-1">
+                      <span>Active Parameters</span>
+                      <strong className="text-ink font-bold">{model.param_count}</strong>
                     </div>
-                    <div className="rounded border border-border/80 bg-background px-2.5 py-1.5">
-                      <span className="text-charcoal-muted block">Hidden Layers</span>
-                      <span className="font-mono font-medium text-charcoal">{model.layers || "N/A"}</span>
+                    <div className="flex items-center justify-between text-xs text-ink-muted">
+                      <span>Context Window</span>
+                      <span className="text-ink">1,024 Tokens</span>
                     </div>
                   </div>
 
-                  {/* Base Model Notice or Fallback Note */}
-                  {isBase && (
-                    <div className="mt-4 rounded-md border border-amber-200 bg-amber-50/70 p-3 text-[11px] text-amber-900 leading-relaxed">
-                      <strong>Base Completion Behavior:</strong> Evaluated using legal precedent completion headers rather than conversational ChatML formatting.
-                      {isFallback && (
-                        <span className="block mt-1 text-amber-800">
-                          * Serving as valid open replacement for gated target <code className="font-mono text-[10px]">gyanai/ayn-88M-hf</code>.
-                        </span>
-                      )}
+                  {/* Architectural Technical Spec Table */}
+                  <div className="mt-5 space-y-2 border-t border-ink/10 pt-4 text-xs font-mono">
+                    <div className="flex items-center justify-between text-ink-muted">
+                      <span>Hidden Dimension:</span>
+                      <span className="text-ink font-semibold">{model.hidden_size || "Default"}</span>
                     </div>
-                  )}
-
-                  {!isBase && model.id === "model_3" && (
-                    <div className="mt-4 rounded-md border border-blue-200 bg-blue-50/60 p-3 text-[11px] text-blue-900 leading-relaxed">
-                      <strong>Domain Specialization:</strong> Fine-tuned specifically on Indian criminal law reform (Bharatiya Nyaya Sanhita 2023). Evaluated on constitutional precedents to verify out-of-distribution reasoning.
+                    <div className="flex items-center justify-between text-ink-muted">
+                      <span>Transformer Layers:</span>
+                      <span className="text-ink font-semibold">{model.layers || "Default"}</span>
                     </div>
-                  )}
+                    <div className="flex items-center justify-between text-ink-muted">
+                      <span>Vocabulary Size:</span>
+                      <span className="text-ink font-semibold">{model.vocab_size || "Default"}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-ink-muted">
+                      <span>Execution Precision:</span>
+                      <span className="text-ink font-semibold">{model.precision || "bfloat16"}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-ink-muted">
+                      <span>Prompt Paradigm:</span>
+                      <span className="text-ink font-semibold">
+                        {isBase ? "Zero-Shot Completion" : "ChatML Instruct"}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Footer Link */}
-                <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
-                  {model.hf_url ? (
-                    <a
-                      href={model.hf_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:text-accent-hover transition-colors"
-                    >
-                      <span>Hugging Face Model</span>
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  ) : (
-                    <span className="text-xs text-charcoal-muted">Hugging Face Hub</span>
-                  )}
-                  <span className="font-mono text-[11px] text-charcoal-faint">
-                    {model.type?.split(" ")[0] || "SLM"}
-                  </span>
+                {/* Bottom Hugging Face Link */}
+                <div className="mt-6 pt-4 border-t border-ink/15">
+                  <a
+                    href={model.hf_url || `https://huggingface.co/${model.hf_id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-lg border border-ink bg-paper-card py-2 text-xs font-mono font-medium text-ink transition-all hover:bg-paper-subtle hover:border-blueprint hover:text-blueprint"
+                  >
+                    <span>Inspect Hugging Face Weights</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
                 </div>
               </div>
             );

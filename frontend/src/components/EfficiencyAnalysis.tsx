@@ -13,7 +13,7 @@ import {
   Cell,
   Label
 } from "recharts";
-import { Zap, Activity, Cpu, SlidersHorizontal, Scale } from "lucide-react";
+import { Zap, Activity, Cpu, Scale } from "lucide-react";
 import { BenchmarkData } from "@/types/benchmark";
 
 interface EfficiencyAnalysisProps {
@@ -42,187 +42,190 @@ export function EfficiencyAnalysis({ data }: EfficiencyAnalysisProps) {
     tokensPerSec: Number((m.metrics.tokens_per_second || 0).toFixed(1)),
   }));
 
-  const colors = ["#4B6B94", "#B2533E", "#5E8C61"];
+  const colors = ["#1A1A1A", "#0B43DC", "#FF4D2D"];
 
   return (
-    <section id="efficiency" className="border-b border-border py-16 sm:py-24 bg-surface">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="efficiency" className="border-b border-ink/20 py-16 sm:py-24 bg-paper/50">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl">
-          <div className="flex items-center gap-2 text-xs font-mono font-medium text-accent uppercase tracking-wider">
-            <Zap className="h-3.5 w-3.5" />
-            <span>Section 07 // Pareto Frontiers</span>
+          <div className="draft-stamp text-ink mb-4">
+            <span className="text-blueprint mr-1.5 font-bold">●</span>
+            <span>SECTION 07 // OPERATIONAL PARETO FRONTIER</span>
           </div>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-normal tracking-tight text-charcoal-heading">
-            Operational Efficiency & Trade-off Analysis
+          <h2 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-ink">
+            Operational Efficiency & Trade-off Frontiers
           </h2>
-          <p className="mt-4 text-base text-charcoal-body leading-relaxed">
-            In edge legal applications, larger parameter footprints do not automatically translate
-            into proportional accuracy gains. We evaluate the Pareto frontier balancing model parameter scale,
-            inference latency, and output fidelity.
+          <p className="mt-3 font-sans text-base text-ink-body leading-relaxed">
+            In edge legal systems, larger parameter count does not automatically ensure higher legal accuracy.
+            We map empirical Pareto curves balancing parameter weight, execution latency, and reasoning fidelity.
           </p>
         </div>
 
         {/* 2 Interactive Scatter Charts */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Chart 1: Quality vs Parameters */}
-          <div className="rounded-xl border border-border bg-background p-6 shadow-card">
-            <div className="flex items-center justify-between pb-3 border-b border-border mb-4">
-              <h3 className="font-serif text-base font-semibold text-charcoal-heading">
-                Quality Score vs. Model Parameter Scale
+          <div className="rounded-2xl border border-ink bg-paper-card p-6 shadow-solid technical-frame">
+            <div className="flex items-center justify-between pb-3 border-b border-ink/15 mb-4">
+              <h3 className="font-sans text-base font-bold text-ink">
+                Quality Score vs. Parameter Scale
               </h3>
-              <span className="text-[11px] font-mono text-charcoal-muted">Pareto Frontier</span>
+              <span className="font-mono text-[11px] text-blueprint font-bold">[0.5B SWEET SPOT]</span>
             </div>
 
             <div className="h-72 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#EAE8E1" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,26,26,0.08)" />
                   <XAxis
                     type="number"
                     dataKey="paramsMillions"
                     name="Parameters (M)"
                     unit="M"
-                    stroke="#71717A"
+                    stroke="#1A1A1A"
                     fontSize={11}
                     domain={[0, 1600]}
+                    fontFamily="Space Mono"
                   >
-                    <Label value="Parameter Count (Millions)" offset={-10} position="insideBottom" fontSize={11} fill="#71717A" />
+                    <Label value="Parameter Count (Millions)" offset={-10} position="insideBottom" fontSize={11} fill="#1A1A1A" fontFamily="Space Mono" />
                   </XAxis>
                   <YAxis
                     type="number"
                     dataKey="qualityScore"
                     name="Quality Score"
-                    stroke="#71717A"
+                    stroke="#1A1A1A"
                     fontSize={11}
                     domain={[0, 0.5]}
+                    fontFamily="Space Mono"
                   >
-                    <Label value="Composite Quality Score" angle={-90} position="insideLeft" fontSize={11} fill="#71717A" />
+                    <Label value="Quality Score" angle={-90} position="insideLeft" fontSize={11} fill="#1A1A1A" fontFamily="Space Mono" />
                   </YAxis>
-                  <ZAxis range={[250, 450]} />
+                  <ZAxis range={[300, 500]} />
                   <Tooltip
                     cursor={{ strokeDasharray: "3 3" }}
                     content={({ payload }) => {
                       if (!payload || !payload.length) return null;
                       const d = payload[0].payload;
                       return (
-                        <div className="rounded-lg border border-border bg-surface p-2.5 shadow-card text-xs">
-                          <strong className="text-charcoal block mb-1">{d.name}</strong>
-                          <div>Parameters: <span className="font-mono">{d.paramsMillions}M</span></div>
-                          <div>Quality Score: <span className="font-mono font-semibold text-accent">{d.qualityScore}</span></div>
-                          <div>Throughput: <span className="font-mono">{d.tokensPerSec} tok/s</span></div>
+                        <div className="rounded-lg border border-ink bg-paper-card p-3 shadow-solid-sm text-xs font-mono">
+                          <strong className="text-ink font-bold block mb-1 font-sans">{d.name}</strong>
+                          <div>Parameters: <span className="font-bold">{d.paramsMillions}M</span></div>
+                          <div>Quality: <strong className="text-blueprint">{d.qualityScore}</strong></div>
+                          <div>Throughput: <span>{d.tokensPerSec} tok/s</span></div>
                         </div>
                       );
                     }}
                   />
                   <Scatter name="Models" data={qualityVsParamsData}>
                     {qualityVsParamsData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                      <Cell key={`cell-${index}`} fill={colors[index % colors.length]} stroke="#1A1A1A" strokeWidth={1} />
                     ))}
                   </Scatter>
                 </ScatterChart>
               </ResponsiveContainer>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-border text-[11px] text-charcoal-muted">
-              <strong>Observation:</strong> Quality peaks at 490M (Qwen2.5-0.5B). Scaling to 1.54B yields lower constitutional accuracy due to specialized domain shift.
+            <div className="mt-4 pt-3 border-t border-ink/10 font-mono text-[11px] text-ink-muted">
+              <strong>Empirical Takeaway:</strong> Reasoning quality peaks at 490M (Qwen2.5-0.5B). Scaling to 1.54B degraded general constitutional accuracy due to narrow statutory domain shift.
             </div>
           </div>
 
           {/* Chart 2: Quality vs Latency */}
-          <div className="rounded-xl border border-border bg-background p-6 shadow-card">
-            <div className="flex items-center justify-between pb-3 border-b border-border mb-4">
-              <h3 className="font-serif text-base font-semibold text-charcoal-heading">
-                Quality Score vs. Inference Latency Trade-off
+          <div className="rounded-2xl border border-ink bg-paper-card p-6 shadow-solid technical-frame">
+            <div className="flex items-center justify-between pb-3 border-b border-ink/15 mb-4">
+              <h3 className="font-sans text-base font-bold text-ink">
+                Quality Score vs. Latency Trade-off
               </h3>
-              <span className="text-[11px] font-mono text-charcoal-muted">Speed vs Fidelity</span>
+              <span className="font-mono text-[11px] text-ink-muted font-bold">[SPEED VS FIDELITY]</span>
             </div>
 
             <div className="h-72 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#EAE8E1" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,26,26,0.08)" />
                   <XAxis
                     type="number"
                     dataKey="latencySec"
                     name="Latency"
                     unit="s"
-                    stroke="#71717A"
+                    stroke="#1A1A1A"
                     fontSize={11}
                     domain={[0, 8]}
+                    fontFamily="Space Mono"
                   >
-                    <Label value="Avg Latency (Seconds/Query)" offset={-10} position="insideBottom" fontSize={11} fill="#71717A" />
+                    <Label value="Avg Latency (Seconds/Query)" offset={-10} position="insideBottom" fontSize={11} fill="#1A1A1A" fontFamily="Space Mono" />
                   </XAxis>
                   <YAxis
                     type="number"
                     dataKey="qualityScore"
                     name="Quality Score"
-                    stroke="#71717A"
+                    stroke="#1A1A1A"
                     fontSize={11}
                     domain={[0, 0.5]}
+                    fontFamily="Space Mono"
                   >
-                    <Label value="Composite Quality Score" angle={-90} position="insideLeft" fontSize={11} fill="#71717A" />
+                    <Label value="Quality Score" angle={-90} position="insideLeft" fontSize={11} fill="#1A1A1A" fontFamily="Space Mono" />
                   </YAxis>
-                  <ZAxis range={[250, 450]} />
+                  <ZAxis range={[300, 500]} />
                   <Tooltip
                     cursor={{ strokeDasharray: "3 3" }}
                     content={({ payload }) => {
                       if (!payload || !payload.length) return null;
                       const d = payload[0].payload;
                       return (
-                        <div className="rounded-lg border border-border bg-surface p-2.5 shadow-card text-xs">
-                          <strong className="text-charcoal block mb-1">{d.name}</strong>
-                          <div>Latency: <span className="font-mono">{d.latencySec}s</span></div>
-                          <div>Quality Score: <span className="font-mono font-semibold text-accent">{d.qualityScore}</span></div>
-                          <div>Throughput: <span className="font-mono">{d.tokensPerSec} tok/s</span></div>
+                        <div className="rounded-lg border border-ink bg-paper-card p-3 shadow-solid-sm text-xs font-mono">
+                          <strong className="text-ink font-bold block mb-1 font-sans">{d.name}</strong>
+                          <div>Latency: <span>{d.latencySec}s</span></div>
+                          <div>Quality: <strong className="text-blueprint">{d.qualityScore}</strong></div>
+                          <div>Throughput: <span>{d.tokensPerSec} tok/s</span></div>
                         </div>
                       );
                     }}
                   />
                   <Scatter name="Models" data={qualityVsLatencyData}>
                     {qualityVsLatencyData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                      <Cell key={`cell-${index}`} fill={colors[index % colors.length]} stroke="#1A1A1A" strokeWidth={1} />
                     ))}
                   </Scatter>
                 </ScatterChart>
               </ResponsiveContainer>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-border text-[11px] text-charcoal-muted">
-              <strong>Observation:</strong> 1.5B model generates shorter outputs resulting in lower latency, but lacks the depth and holding precision of the 0.5B model.
+            <div className="mt-4 pt-3 border-t border-ink/10 font-mono text-[11px] text-ink-muted">
+              <strong>Empirical Takeaway:</strong> 1.5B generates terse completions with faster single-pass time, but omits ratio decidendi analysis delivered by the 0.5B instruct model.
             </div>
           </div>
         </div>
 
         {/* 3 Pillars of Practical Deployment */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-lg border border-border bg-background p-5 shadow-subtle">
-            <span className="font-mono text-xs font-semibold text-accent uppercase tracking-wider block mb-2">
-              Model Size (Footprint)
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="rounded-xl border border-ink bg-paper-card p-5 shadow-solid-sm">
+            <span className="font-mono text-xs font-bold text-blueprint uppercase tracking-wider block mb-2">
+              01 // Parameter Footprint
             </span>
-            <p className="text-xs text-charcoal-body leading-relaxed">
-              At 135M and 490M parameters, models can run comfortably on consumer laptops, edge mobile hardware,
-              or low-cost cloud CPUs without requiring high-end A100 VRAM allocations.
+            <p className="font-sans text-xs text-ink-body leading-relaxed">
+              At 135M and 490M parameters, these models execute smoothly on consumer laptops, advocate workstations,
+              or edge mobile devices with zero external cloud dependencies.
             </p>
           </div>
 
-          <div className="rounded-lg border border-border bg-background p-5 shadow-subtle">
-            <span className="font-mono text-xs font-semibold text-accent uppercase tracking-wider block mb-2">
-              Throughput & Latency
+          <div className="rounded-xl border border-ink bg-paper-card p-5 shadow-solid-sm">
+            <span className="font-mono text-xs font-bold text-safety uppercase tracking-wider block mb-2">
+              02 // Throughput & Interactivity
             </span>
-            <p className="text-xs text-charcoal-body leading-relaxed">
-              Qwen2.5-0.5B-Instruct achieves <strong>26.98 tokens/second</strong>, providing sub-second initial token delivery
-              and interactive streaming suitable for legal research search assistants.
+            <p className="font-sans text-xs text-ink-body leading-relaxed">
+              Qwen2.5-0.5B-Instruct achieves <strong>26.98 tokens/second</strong>, delivering instant token generation
+              suitable for real-time legal research and statutory search assistants.
             </p>
           </div>
 
-          <div className="rounded-lg border border-border bg-background p-5 shadow-subtle">
-            <span className="font-mono text-xs font-semibold text-accent uppercase tracking-wider block mb-2">
-              Quality Return per Flop
+          <div className="rounded-xl border border-ink bg-paper-card p-5 shadow-solid-sm">
+            <span className="font-mono text-xs font-bold text-ink uppercase tracking-wider block mb-2">
+              03 // Return per Flop
             </span>
-            <p className="text-xs text-charcoal-body leading-relaxed">
-              SmolLM2-135M yielded <strong>2.10 Quality points / Billion parameters</strong>, proving that compact
-              pretraining corpora provide strong syntactic foundations, provided instruction tuning is layered on top.
+            <p className="font-sans text-xs text-ink-body leading-relaxed">
+              SmolLM2-135M yields <strong>2.10 Quality pts / Billion parameters</strong>, proving that compact
+              foundations offer high operational utility when paired with targeted instruction alignment.
             </p>
           </div>
         </div>

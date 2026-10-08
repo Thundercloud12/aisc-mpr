@@ -8,7 +8,6 @@ import {
   Code2,
   Cpu,
   BarChart2,
-  Search,
   Activity,
   AlertOctagon,
   Scale
@@ -30,7 +29,7 @@ export function Methodology() {
     },
     {
       num: "03",
-      title: "Held-Out Test Set Partitioning",
+      title: "Held-Out Test Partitioning",
       icon: Layers,
       content: "Partitioned an 80/20 train/test split locked to random_state=42. Subsampled 50 held-out judicial queries for zero-shot and instruct benchmarking to prevent in-distribution memorization bias."
     },
@@ -62,46 +61,46 @@ export function Methodology() {
       num: "08",
       title: "Limitations & Proxy Caveats",
       icon: AlertOctagon,
-      content: "Automated lexical and semantic scores act as computational proxies. Semantic similarity and entity overlap cannot substitute for judicial review by a qualified legal scholar or advocate."
+      content: "Automated lexical and semantic scores act as computational proxies. Semantic similarity and entity overlap cannot substitute for judicial review by a qualified legal scholar or enrolled advocate."
     }
   ];
 
   return (
-    <section id="methodology" className="border-b border-border py-16 sm:py-24 bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="methodology" className="border-b border-ink/20 py-16 sm:py-24 bg-paper/60">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl">
-          <div className="flex items-center gap-2 text-xs font-mono font-medium text-accent uppercase tracking-wider">
-            <Layers className="h-3.5 w-3.5" />
-            <span>Section 08 // Scientific Protocol</span>
+          <div className="draft-stamp text-ink mb-4">
+            <span className="text-blueprint mr-1.5 font-bold">●</span>
+            <span>SECTION 08 // SCIENTIFIC PROTOCOL</span>
           </div>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-normal tracking-tight text-charcoal-heading">
+          <h2 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-ink">
             Evaluation Methodology & Experimental Rigor
           </h2>
-          <p className="mt-4 text-base text-charcoal-body leading-relaxed">
+          <p className="mt-3 font-sans text-base text-ink-body leading-relaxed">
             A reproducible eight-stage academic protocol designed to evaluate reasoning capabilities,
-            mitigate data leakage, and establish objective multi-criteria performance baselines.
+            mitigate memorization artifacts, and establish objective multi-criteria performance baselines.
           </p>
         </div>
 
         {/* 8-Step Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map((st) => {
             const Icon = st.icon;
             return (
               <div
                 key={st.num}
-                className="rounded-xl border border-border bg-surface p-5 shadow-subtle hover:border-accent/40 transition-colors flex flex-col justify-between"
+                className="rounded-xl border border-ink bg-paper-card p-5 shadow-solid-sm transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between pb-2 border-b border-border text-xs mb-3">
-                    <span className="font-mono font-bold text-accent">Stage {st.num}</span>
-                    <Icon className="h-4 w-4 text-charcoal-muted" />
+                  <div className="flex items-center justify-between pb-2 border-b border-ink/15 text-xs mb-3 font-mono">
+                    <span className="font-bold text-blueprint">STAGE {st.num}</span>
+                    <Icon className="h-4 w-4 text-ink-muted" />
                   </div>
-                  <h3 className="font-serif text-sm font-semibold text-charcoal-heading">
+                  <h3 className="font-sans text-sm font-bold text-ink">
                     {st.title}
                   </h3>
-                  <p className="mt-2 text-xs text-charcoal-body leading-relaxed">
+                  <p className="mt-2 font-sans text-xs text-ink-muted leading-relaxed">
                     {st.content}
                   </p>
                 </div>
@@ -111,13 +110,15 @@ export function Methodology() {
         </div>
 
         {/* Legal Disclaimer Box */}
-        <div className="mt-10 rounded-xl border border-border bg-surface-subtle p-6 text-xs text-charcoal-muted flex items-start gap-3.5">
-          <Scale className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+        <div className="mt-10 rounded-2xl border border-ink bg-paper-card p-6 shadow-solid text-xs text-ink-muted flex items-start gap-4">
+          <div className="flex h-8 w-8 items-center justify-center rounded border border-ink bg-paper-subtle text-safety shrink-0 mt-0.5">
+            <Scale className="h-4 w-4" />
+          </div>
           <div>
-            <strong className="text-charcoal font-semibold block text-sm mb-1">
+            <strong className="text-ink font-bold block text-sm mb-1 font-sans">
               Academic Disclaimer & Evaluation Heuristic Bounds
             </strong>
-            <p className="leading-relaxed">
+            <p className="font-sans leading-relaxed text-ink-body">
               Automated evaluation metrics (Token F1, ROUGE, MiniLM embeddings) measure lexical overlap and vector similarity against historical ground-truth precedents. They do not model legal validities under changing statutes, jurisdictional distinctions between High Courts and the Supreme Court, or subsequent legislative amendments. No benchmark score establishes professional legal authority.
             </p>
           </div>
