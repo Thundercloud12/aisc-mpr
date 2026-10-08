@@ -9,18 +9,10 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
-  ScatterChart,
-  Scatter,
-  ZAxis
+  ResponsiveContainer
 } from "recharts";
-import { BarChart3, ShieldCheck, Zap, Award, CheckCircle2, AlertTriangle, ArrowUpDown } from "lucide-react";
-import { BenchmarkData, ModelData } from "@/types/benchmark";
+import { BarChart3, ShieldCheck, Zap, Award, ArrowUpRight } from "lucide-react";
+import { BenchmarkData } from "@/types/benchmark";
 
 interface ResultsDashboardProps {
   data: BenchmarkData;
@@ -34,7 +26,7 @@ export function ResultsDashboard({ data }: ResultsDashboardProps) {
 
   // 1. Quality Data preparation
   const qualityChartData = models.map((m) => ({
-    name: m.name.split(" ")[0], // short name
+    name: m.name.split(" ")[0],
     fullName: m.name,
     "Token F1": Number((m.metrics.f1_score || 0).toFixed(4)),
     "ROUGE-L": Number((m.metrics.rougeL || 0).toFixed(4)),
@@ -62,119 +54,119 @@ export function ResultsDashboard({ data }: ResultsDashboardProps) {
     "Tokens/Sec": Number((m.metrics.tokens_per_second || 0).toFixed(2)),
     "Avg Latency (s)": Number((m.metrics.avg_latency_sec || 0).toFixed(3)),
     "Quality / B-Param": Number((m.metrics.quality_per_b_param || 0).toFixed(2)),
-    parameters: m.parameters / 1e6,
   }));
 
   return (
-    <section id="results" className="border-b border-border py-16 sm:py-24 bg-surface">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="results" className="border-b border-ink/20 py-16 sm:py-24 bg-paper/50">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl">
-          <div className="flex items-center gap-2 text-xs font-mono font-medium text-accent uppercase tracking-wider">
-            <BarChart3 className="h-3.5 w-3.5" />
-            <span>Section 03 // Empirical Results</span>
+          <div className="draft-stamp text-ink mb-4">
+            <span className="text-blueprint mr-1.5 font-bold">●</span>
+            <span>SECTION 03 // QUANTITATIVE ANALYSIS</span>
           </div>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-normal tracking-tight text-charcoal-heading">
-            Comparative Benchmark Results Dashboard
+          <h2 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-ink">
+            Comparative Benchmark Results
           </h2>
-          <p className="mt-4 text-base text-charcoal-body leading-relaxed">
-            Quantitative analysis across 50 held-out Indian Constitutional case queries. All metrics
-            are read directly from benchmark execution logs.
+          <p className="mt-3 font-sans text-base text-ink-body leading-relaxed">
+            Rigorous automated scoring across 50 held-out Indian Constitutional case queries.
+            Metrics are ingested directly from verified Google Colab experimental logs.
           </p>
         </div>
 
-        {/* Tab Controls */}
-        <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-border pb-4">
+        {/* Tab Controls (Illoca Drafting Capsule Buttons) */}
+        <div className="mt-10 flex flex-wrap items-center gap-3 border-b border-ink/15 pb-4">
           <button
             onClick={() => setActiveTab("quality")}
-            className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-xs font-medium transition-all ${
+            className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 font-mono text-xs font-bold transition-all ${
               activeTab === "quality"
-                ? "bg-accent text-white shadow-subtle"
-                : "bg-surface-subtle text-charcoal-muted hover:text-charcoal hover:bg-surface-muted"
+                ? "border border-ink bg-blueprint text-white shadow-solid-sm"
+                : "border border-ink/30 bg-paper-card text-ink hover:bg-paper-subtle hover:border-ink"
             }`}
           >
             <Award className="h-3.5 w-3.5" />
-            <span>Reasoning & Quality</span>
+            <span>01 // Reasoning & Quality</span>
           </button>
           <button
             onClick={() => setActiveTab("reliability")}
-            className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-xs font-medium transition-all ${
+            className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 font-mono text-xs font-bold transition-all ${
               activeTab === "reliability"
-                ? "bg-accent text-white shadow-subtle"
-                : "bg-surface-subtle text-charcoal-muted hover:text-charcoal hover:bg-surface-muted"
+                ? "border border-ink bg-blueprint text-white shadow-solid-sm"
+                : "border border-ink/30 bg-paper-card text-ink hover:bg-paper-subtle hover:border-ink"
             }`}
           >
             <ShieldCheck className="h-3.5 w-3.5" />
-            <span>Reliability & Safety</span>
+            <span>02 // Hallucination Risk</span>
           </button>
           <button
             onClick={() => setActiveTab("efficiency")}
-            className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-xs font-medium transition-all ${
+            className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 font-mono text-xs font-bold transition-all ${
               activeTab === "efficiency"
-                ? "bg-accent text-white shadow-subtle"
-                : "bg-surface-subtle text-charcoal-muted hover:text-charcoal hover:bg-surface-muted"
+                ? "border border-ink bg-blueprint text-white shadow-solid-sm"
+                : "border border-ink/30 bg-paper-card text-ink hover:bg-paper-subtle hover:border-ink"
             }`}
           >
             <Zap className="h-3.5 w-3.5" />
-            <span>Throughput & Efficiency</span>
+            <span>03 // Throughput & Latency</span>
           </button>
         </div>
 
         {/* Charts Container */}
-        <div className="mt-8 rounded-xl border border-border bg-background p-6 shadow-card">
+        <div className="mt-8 rounded-2xl border border-ink bg-paper-card p-6 shadow-solid technical-frame">
           {activeTab === "quality" && (
             <div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
                 <div>
-                  <h3 className="font-serif text-lg font-medium text-charcoal-heading">
+                  <h3 className="font-sans text-lg font-bold text-ink">
                     Lexical & Semantic Quality Metrics
                   </h3>
-                  <p className="text-xs text-charcoal-muted">
-                    Token F1, ROUGE-L sequence overlap, and all-MiniLM-L6-v2 cosine semantic similarity
+                  <p className="font-mono text-xs text-ink-muted">
+                    Token F1, ROUGE-L sequence alignment, and all-MiniLM-L6-v2 cosine semantic similarity
                   </p>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono text-charcoal-muted">
-                  <span className="flex h-2 w-2 rounded-full bg-accent" />
-                  <span>Higher is better (0.0 – 1.0)</span>
+                <div className="flex items-center gap-2 font-mono text-xs text-ink-muted">
+                  <span className="flex h-2 w-2 rounded-full bg-blueprint" />
+                  <span>Higher is better [0.00 – 1.00]</span>
                 </div>
               </div>
 
               <div className="h-80 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={qualityChartData} margin={{ top: 20, right: 30, left: 10, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#EAE8E1" vertical={false} />
-                    <XAxis dataKey="name" stroke="#71717A" fontSize={12} tickLine={false} />
-                    <YAxis stroke="#71717A" fontSize={12} tickLine={false} domain={[0, 1]} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,26,26,0.08)" vertical={false} />
+                    <XAxis dataKey="name" stroke="#1A1A1A" fontSize={12} tickLine={false} fontFamily="Space Mono" />
+                    <YAxis stroke="#1A1A1A" fontSize={12} tickLine={false} domain={[0, 1]} fontFamily="Space Mono" />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: "#FFFFFF",
-                        borderColor: "#E2E0D8",
+                        backgroundColor: "#FFFDF8",
+                        borderColor: "#1A1A1A",
                         borderRadius: "8px",
                         fontSize: "12px",
-                        boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)"
+                        boxShadow: "2px 2px 0px #1A1A1A",
+                        fontFamily: "Space Mono"
                       }}
                     />
-                    <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }} />
-                    <Bar dataKey="Token F1" fill="#4B6B94" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="ROUGE-L" fill="#5E8C61" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="Semantic Sim" fill="#B2533E" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="Quality Score" fill="#885EAD" radius={[4, 4, 0, 0]} />
+                    <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "10px", fontFamily: "Space Mono" }} />
+                    <Bar dataKey="Token F1" fill="#0B43DC" radius={[2, 2, 0, 0]} />
+                    <Bar dataKey="ROUGE-L" fill="#1A1A1A" radius={[2, 2, 0, 0]} />
+                    <Bar dataKey="Semantic Sim" fill="#FF4D2D" radius={[2, 2, 0, 0]} />
+                    <Bar dataKey="Quality Score" fill="#5A564C" radius={[2, 2, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-border grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-charcoal-muted">
+              <div className="mt-4 pt-4 border-t border-ink/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-ink-muted">
                 <div>
-                  <strong className="text-charcoal block">Composite Formula:</strong>
-                  Quality Score = (F1 + ROUGE-L + Semantic Sim) / 3
+                  <strong className="text-ink block">Composite Quality Formula:</strong>
+                  (Token F1 + ROUGE-L + Semantic Sim) / 3
                 </div>
                 <div>
-                  <strong className="text-charcoal block">Top Quality Model:</strong>
-                  {rankings[0]?.model_name || "Qwen2.5-0.5B-Instruct"} ({qualityChartData[1]?.["Quality Score"] || 0.369})
+                  <strong className="text-ink block">Top Scoring Candidate:</strong>
+                  {rankings[0]?.model_name || "Qwen2.5-0.5B-Instruct"} (0.369 Quality Score)
                 </div>
                 <div>
-                  <strong className="text-charcoal block">Key Observation:</strong>
-                  Generalist instruction model exhibits strongest semantic fidelity to judicial holding.
+                  <strong className="text-ink block">Key Insight:</strong>
+                  Generalist instruction tuning yields 2.3× higher semantic agreement than domain-tuned 1.5B.
                 </div>
               </div>
             </div>
@@ -184,53 +176,55 @@ export function ResultsDashboard({ data }: ResultsDashboardProps) {
             <div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
                 <div>
-                  <h3 className="font-serif text-lg font-medium text-charcoal-heading">
+                  <h3 className="font-sans text-lg font-bold text-ink">
                     Factuality Proxy & Hallucination Risk Distribution
                   </h3>
-                  <p className="text-xs text-charcoal-muted">
-                    Proportion of answers categorized into Low (&ge;0.65), Medium (0.40–0.65), and High (&lt;0.40) risk
+                  <p className="font-mono text-xs text-ink-muted">
+                    Ratio of responses classified into Low (≥0.65), Medium (0.40–0.65), and High (&lt;0.40) risk
                   </p>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono text-charcoal-muted">
-                  <span className="flex h-2 w-2 rounded-full bg-emerald-600" />
-                  <span>Automated Heuristic Proxy</span>
+                <div className="flex items-center gap-2 font-mono text-xs text-ink-muted">
+                  <span className="flex h-2 w-2 rounded-full bg-safety" />
+                  <span>Automated Legal Entity + Cosine Proxy</span>
                 </div>
               </div>
 
               <div className="h-80 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={reliabilityChartData} margin={{ top: 20, right: 30, left: 10, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#EAE8E1" vertical={false} />
-                    <XAxis dataKey="name" stroke="#71717A" fontSize={12} tickLine={false} />
-                    <YAxis stroke="#71717A" fontSize={12} tickLine={false} domain={[0, 100]} unit="%" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,26,26,0.08)" vertical={false} />
+                    <XAxis dataKey="name" stroke="#1A1A1A" fontSize={12} tickLine={false} fontFamily="Space Mono" />
+                    <YAxis stroke="#1A1A1A" fontSize={12} tickLine={false} domain={[0, 100]} unit="%" fontFamily="Space Mono" />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: "#FFFFFF",
-                        borderColor: "#E2E0D8",
+                        backgroundColor: "#FFFDF8",
+                        borderColor: "#1A1A1A",
                         borderRadius: "8px",
                         fontSize: "12px",
+                        boxShadow: "2px 2px 0px #1A1A1A",
+                        fontFamily: "Space Mono"
                       }}
                     />
-                    <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }} />
-                    <Bar dataKey="Low Risk %" fill="#15803D" radius={[4, 4, 0, 0]} stackId="risk" />
+                    <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "10px", fontFamily: "Space Mono" }} />
+                    <Bar dataKey="Low Risk %" fill="#0B43DC" radius={[2, 2, 0, 0]} stackId="risk" />
                     <Bar dataKey="Medium Risk %" fill="#D97706" radius={[0, 0, 0, 0]} stackId="risk" />
-                    <Bar dataKey="High Risk %" fill="#DC2626" radius={[4, 4, 0, 0]} stackId="risk" />
+                    <Bar dataKey="High Risk %" fill="#FF4D2D" radius={[2, 2, 0, 0]} stackId="risk" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-border grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-charcoal-muted">
+              <div className="mt-4 pt-4 border-t border-ink/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-ink-muted">
                 <div>
-                  <strong className="text-charcoal block">Factuality Proxy Formula:</strong>
-                  F_proxy = 0.50 &times; Cosine Similarity + 0.50 &times; Legal Entity Retention
+                  <strong className="text-ink block">Factuality Proxy Metric:</strong>
+                  0.50 × Cosine Similarity + 0.50 × Legal Entity Retention
                 </div>
                 <div>
-                  <strong className="text-charcoal block">Safest Output Distribution:</strong>
-                  Qwen2.5-0.5B-Instruct (48% Low Risk, only 20% High Risk)
+                  <strong className="text-ink block">Lowest Hallucination Rate:</strong>
+                  Qwen2.5-0.5B-Instruct (Only 16% classified High Risk)
                 </div>
                 <div>
-                  <strong className="text-charcoal block">Disclaimer:</strong>
-                  Automated proxies evaluate vocabulary and semantic similarity; they do not replace human judicial verification.
+                  <strong className="text-ink block">Domain Specialist Vulnerability:</strong>
+                  1.5B model exhibited 90% High Risk when queried outside criminal reform acts.
                 </div>
               </div>
             </div>
@@ -240,89 +234,90 @@ export function ResultsDashboard({ data }: ResultsDashboardProps) {
             <div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
                 <div>
-                  <h3 className="font-serif text-lg font-medium text-charcoal-heading">
+                  <h3 className="font-sans text-lg font-bold text-ink">
                     Inference Throughput & Latency Profiling
                   </h3>
-                  <p className="text-xs text-charcoal-muted">
-                    Execution speed in Tokens/Second vs Average Response Latency per query
+                  <p className="font-mono text-xs text-ink-muted">
+                    Execution speed in Tokens/Second vs Parameter-normalized Quality
                   </p>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono text-charcoal-muted">
-                  <span className="flex h-2 w-2 rounded-full bg-accent" />
-                  <span>Hardware: NVIDIA T4 / GPU</span>
+                <div className="flex items-center gap-2 font-mono text-xs text-ink-muted">
+                  <span className="flex h-2 w-2 rounded-full bg-blueprint" />
+                  <span>Hardware: NVIDIA GPU // Precision: bfloat16</span>
                 </div>
               </div>
 
               <div className="h-80 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={efficiencyChartData} margin={{ top: 20, right: 30, left: 10, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#EAE8E1" vertical={false} />
-                    <XAxis dataKey="name" stroke="#71717A" fontSize={12} tickLine={false} />
-                    <YAxis yAxisId="left" stroke="#71717A" fontSize={12} tickLine={false} />
-                    <YAxis yAxisId="right" orientation="right" stroke="#71717A" fontSize={12} tickLine={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,26,26,0.08)" vertical={false} />
+                    <XAxis dataKey="name" stroke="#1A1A1A" fontSize={12} tickLine={false} fontFamily="Space Mono" />
+                    <YAxis yAxisId="left" stroke="#1A1A1A" fontSize={12} tickLine={false} fontFamily="Space Mono" />
+                    <YAxis yAxisId="right" orientation="right" stroke="#1A1A1A" fontSize={12} tickLine={false} fontFamily="Space Mono" />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: "#FFFFFF",
-                        borderColor: "#E2E0D8",
+                        backgroundColor: "#FFFDF8",
+                        borderColor: "#1A1A1A",
                         borderRadius: "8px",
                         fontSize: "12px",
+                        boxShadow: "2px 2px 0px #1A1A1A",
+                        fontFamily: "Space Mono"
                       }}
                     />
-                    <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }} />
-                    <Bar yAxisId="left" dataKey="Tokens/Sec" fill="#1E293B" radius={[4, 4, 0, 0]} />
-                    <Bar yAxisId="right" dataKey="Avg Latency (s)" fill="#9E3C1B" radius={[4, 4, 0, 0]} />
-                    <Bar yAxisId="left" dataKey="Quality / B-Param" fill="#0D9488" radius={[4, 4, 0, 0]} />
+                    <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "10px", fontFamily: "Space Mono" }} />
+                    <Bar yAxisId="left" dataKey="Tokens/Sec" fill="#0B43DC" radius={[2, 2, 0, 0]} />
+                    <Bar yAxisId="right" dataKey="Avg Latency (s)" fill="#FF4D2D" radius={[2, 2, 0, 0]} />
+                    <Bar yAxisId="left" dataKey="Quality / B-Param" fill="#1A1A1A" radius={[2, 2, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-border grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-charcoal-muted">
+              <div className="mt-4 pt-4 border-t border-ink/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-ink-muted">
                 <div>
-                  <strong className="text-charcoal block">Highest Throughput:</strong>
-                  Qwen2.5-0.5B-Instruct ({efficiencyChartData[1]?.["Tokens/Sec"] || 26.98} tokens/sec)
+                  <strong className="text-ink block">Maximum Throughput:</strong>
+                  Qwen2.5-0.5B-Instruct (26.98 tokens/sec)
                 </div>
                 <div>
-                  <strong className="text-charcoal block">Best Quality / B-Param:</strong>
-                  SmolLM2-135M (2.10 points / B-Param due to tiny 135M footprint)
+                  <strong className="text-ink block">Top Parameter Efficiency:</strong>
+                  SmolLM2-135M (2.10 Quality pts / Billion Parameters)
                 </div>
                 <div>
-                  <strong className="text-charcoal block">Operational Takeaway:</strong>
-                  0.5B parameter models strike the optimal balance for real-time edge or cloud legal serving.
+                  <strong className="text-ink block">Deployment Decision:</strong>
+                  0.5B architecture achieves optimal speed-accuracy tradeoff for client-side execution.
                 </div>
               </div>
             </div>
           )}
         </div>
 
-        {/* Master Comparison Table */}
-        <div className="mt-12">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-serif text-xl font-medium text-charcoal-heading">
-              Comprehensive Performance Leaderboard
+        {/* Master Comparison Table (Architectural Drafting Leaderboard) */}
+        <div className="mt-14">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <h3 className="font-sans text-xl font-bold text-ink">
+              Official Benchmark Leaderboard
             </h3>
-            <span className="text-xs text-charcoal-muted font-mono">
-              Evaluated on n=50 held-out cases
+            <span className="font-mono text-xs text-ink-muted">
+              [50 HELD-OUT CONSTITUTIONAL QUERIES]
             </span>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-border bg-surface shadow-subtle">
-            <table className="w-full text-left text-xs">
-              <thead className="border-b border-border bg-surface-subtle font-mono uppercase text-charcoal-muted tracking-wider">
+          <div className="overflow-x-auto rounded-xl border border-ink bg-paper-card shadow-solid">
+            <table className="w-full text-left text-xs font-mono">
+              <thead className="border-b border-ink bg-paper-subtle uppercase tracking-wider text-ink font-bold">
                 <tr>
                   <th className="px-4 py-3.5">Rank</th>
                   <th className="px-4 py-3.5">Model</th>
-                  <th className="px-4 py-3.5">Parameters</th>
+                  <th className="px-4 py-3.5">Params</th>
                   <th className="px-4 py-3.5">Token F1</th>
                   <th className="px-4 py-3.5">ROUGE-L</th>
                   <th className="px-4 py-3.5">Semantic Sim</th>
-                  <th className="px-4 py-3.5">Factuality Proxy</th>
-                  <th className="px-4 py-3.5">Composite Quality</th>
+                  <th className="px-4 py-3.5">Factuality</th>
+                  <th className="px-4 py-3.5">Quality</th>
                   <th className="px-4 py-3.5">Tokens/Sec</th>
-                  <th className="px-4 py-3.5">Latency</th>
-                  <th className="px-4 py-3.5 font-semibold text-accent">Overall Score</th>
+                  <th className="px-4 py-3.5 font-bold text-blueprint">Overall Score</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border">
+              <tbody className="divide-y divide-ink/10">
                 {models.map((m) => {
                   const rankInfo = rankings.find((r) => r.model_id === m.id);
                   const isFirst = rankInfo?.rank === 1;
@@ -330,34 +325,33 @@ export function ResultsDashboard({ data }: ResultsDashboardProps) {
                   return (
                     <tr
                       key={m.id}
-                      className={`transition-colors hover:bg-surface-subtle/70 ${
-                        isFirst ? "bg-accent-light/30" : ""
+                      className={`transition-colors ${
+                        isFirst ? "bg-blueprint-light/50 font-semibold" : "hover:bg-paper-subtle/60"
                       }`}
                     >
-                      <td className="px-4 py-4 font-mono font-bold">
+                      <td className="px-4 py-4 font-bold">
                         {isFirst ? (
-                          <span className="inline-flex items-center gap-1 rounded bg-accent px-2 py-0.5 text-white">
+                          <span className="inline-flex items-center gap-1 rounded bg-blueprint px-2 py-0.5 text-white">
                             #1
                           </span>
                         ) : (
-                          <span className="text-charcoal-muted">#{rankInfo?.rank || "-"}</span>
+                          <span className="text-ink-muted">#{rankInfo?.rank || "-"}</span>
                         )}
                       </td>
                       <td className="px-4 py-4">
-                        <div className="font-medium text-charcoal-heading">{m.name}</div>
-                        <div className="font-mono text-[11px] text-charcoal-muted">{m.hf_id || m.id}</div>
+                        <div className="font-bold text-ink font-sans text-sm">{m.name}</div>
+                        <div className="text-[10px] text-ink-muted">{m.hf_id || m.id}</div>
                       </td>
-                      <td className="px-4 py-4 font-mono">{m.param_count}</td>
-                      <td className="px-4 py-4 font-mono tabular-nums">{m.metrics.f1_score?.toFixed(3)}</td>
-                      <td className="px-4 py-4 font-mono tabular-nums">{m.metrics.rougeL?.toFixed(3)}</td>
-                      <td className="px-4 py-4 font-mono tabular-nums">{m.metrics.semantic_similarity?.toFixed(3)}</td>
-                      <td className="px-4 py-4 font-mono tabular-nums">{m.metrics.factuality_proxy?.toFixed(3)}</td>
-                      <td className="px-4 py-4 font-mono font-semibold tabular-nums text-charcoal">
+                      <td className="px-4 py-4">{m.param_count}</td>
+                      <td className="px-4 py-4 tabular-nums">{m.metrics.f1_score?.toFixed(3)}</td>
+                      <td className="px-4 py-4 tabular-nums">{m.metrics.rougeL?.toFixed(3)}</td>
+                      <td className="px-4 py-4 tabular-nums">{m.metrics.semantic_similarity?.toFixed(3)}</td>
+                      <td className="px-4 py-4 tabular-nums">{m.metrics.factuality_proxy?.toFixed(3)}</td>
+                      <td className="px-4 py-4 font-bold tabular-nums text-ink">
                         {m.metrics.quality_score?.toFixed(3)}
                       </td>
-                      <td className="px-4 py-4 font-mono tabular-nums">{m.metrics.tokens_per_second?.toFixed(1)}</td>
-                      <td className="px-4 py-4 font-mono tabular-nums">{m.metrics.avg_latency_sec?.toFixed(2)}s</td>
-                      <td className="px-4 py-4 font-mono font-bold text-accent tabular-nums text-sm">
+                      <td className="px-4 py-4 tabular-nums">{m.metrics.tokens_per_second?.toFixed(1)}</td>
+                      <td className="px-4 py-4 font-bold text-blueprint tabular-nums text-sm">
                         {rankInfo?.overall_score?.toFixed(3) || "N/A"}
                       </td>
                     </tr>

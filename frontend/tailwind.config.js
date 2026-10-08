@@ -8,45 +8,79 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#FBFBFA",
-        surface: "#FFFFFF",
-        "surface-subtle": "#F5F4F0",
-        "surface-muted": "#ECEAE3",
-        border: "#E2E0D8",
-        "border-dark": "#C8C5BA",
+        // Illoca Architectural Palette
+        background: "#EBE5D8",
+        paper: {
+          DEFAULT: "#EBE5D8",
+          subtle: "#E4DDCF",
+          card: "#FFFDF8",
+          muted: "#D8D0BF",
+          pure: "#FFFFFF",
+        },
+        surface: "#FFFDF8",
+        "surface-subtle": "#F4EFE5",
+        "surface-muted": "#EBE5D8",
+        border: "rgba(26, 26, 26, 0.14)",
+        "border-dark": "#1A1A1A",
+        ink: {
+          DEFAULT: "#1A1A1A",
+          heading: "#111111",
+          body: "#2A2824",
+          muted: "#666155",
+          faint: "#969082",
+        },
         charcoal: {
-          DEFAULT: "#18181B",
-          heading: "#111113",
-          body: "#3F3F46",
-          muted: "#71717A",
-          faint: "#A1A1AA",
+          DEFAULT: "#1A1A1A",
+          heading: "#111111",
+          body: "#33302B",
+          muted: "#666155",
+          faint: "#969082",
+        },
+        // Blueprint Cobalt
+        blueprint: {
+          DEFAULT: "#0B43DC",
+          hover: "#0833AA",
+          light: "#EBF1FF",
+          border: "#8BAEFF",
+          dark: "#051F68",
         },
         accent: {
-          DEFAULT: "#9E3C1B", // Terracotta/judicial sienna
-          hover: "#842F13",
-          light: "#FDF2EE",
-          border: "#F3D5C9",
+          DEFAULT: "#0B43DC",
+          hover: "#0833AA",
+          light: "#EBF1FF",
+          border: "#8BAEFF",
         },
+        // Deep Blueprint Navy Slate
         navy: {
-          DEFAULT: "#1E293B",
-          light: "#F1F5F9",
+          DEFAULT: "#0D1B40",
+          slate: "#0D1B40",
+          dark: "#071026",
+          card: "#122352",
+          light: "#EBF1FF",
+        },
+        // Safety Red-Orange Tag Accent
+        safety: {
+          DEFAULT: "#FF4D2D",
+          hover: "#E0381B",
+          light: "#FFF0ED",
         },
         success: {
-          DEFAULT: "#15803D",
-          light: "#F0FDF4",
+          DEFAULT: "#127D3E",
+          light: "#EAF7EE",
         },
         warning: {
-          DEFAULT: "#B45309",
-          light: "#FFFBEB",
+          DEFAULT: "#D97706",
+          light: "#FEF3C7",
         },
         danger: {
-          DEFAULT: "#B91C1C",
-          light: "#FEF2F2",
+          DEFAULT: "#DC2626",
+          light: "#FEE2E2",
         }
       },
       fontFamily: {
         sans: [
-          "Inter",
+          '"Space Grotesk"',
+          '"Inter"',
           "-apple-system",
           "BlinkMacSystemFont",
           '"Segoe UI"',
@@ -57,20 +91,25 @@ module.exports = {
           '"Newsreader"',
           '"Playfair Display"',
           "Georgia",
-          "Cambria",
           "serif"
         ],
         mono: [
+          '"Space Mono"',
           '"JetBrains Mono"',
-          '"Fira Code"',
+          '"SF Mono"',
+          "Menlo",
           "Consolas",
           "monospace"
         ]
       },
       boxShadow: {
-        subtle: "0 1px 2px 0 rgba(0, 0, 0, 0.04)",
-        card: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)",
-        elevated: "0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04)",
+        subtle: "0 1px 2px 0 rgba(26, 26, 26, 0.05)",
+        card: "0 2px 4px 0 rgba(26, 26, 26, 0.06)",
+        elevated: "0 10px 25px -5px rgba(26, 26, 26, 0.08), 0 8px 10px -6px rgba(26, 26, 26, 0.04)",
+        blueprint: "0 0 0 1px #0B43DC, 0 8px 24px -4px rgba(11, 67, 220, 0.25)",
+        solid: "3px 3px 0px 0px #1A1A1A",
+        "solid-sm": "2px 2px 0px 0px #1A1A1A",
+        "solid-blue": "3px 3px 0px 0px #0B43DC",
       }
     },
   },

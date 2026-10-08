@@ -1,67 +1,73 @@
 "use client";
 
 import React from "react";
-import { CheckCircle, ArrowRight, Lightbulb, Compass, Database, Scale } from "lucide-react";
+import { Compass, Cpu, BookOpen, Database, ArrowRight } from "lucide-react";
 
 export function Conclusion() {
   return (
-    <section className="border-b border-border py-16 sm:py-24 bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="border-b border-ink/20 py-16 sm:py-24 bg-paper/50">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <div className="flex items-center gap-2 text-xs font-mono font-medium text-accent uppercase tracking-wider">
-            <Compass className="h-3.5 w-3.5" />
-            <span>Section 10 // Synthesis & Roadmap</span>
+          <div className="draft-stamp text-ink mb-4">
+            <span className="text-blueprint mr-1.5 font-bold">●</span>
+            <span>SECTION 10 // PRACTICAL DEPLOYMENT GUIDANCE</span>
           </div>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-normal tracking-tight text-charcoal-heading">
-            Conclusions & Deployment Recommendations
+          <h2 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-ink">
+            Conclusions & Engineering Recommendations
           </h2>
-          <p className="mt-4 text-base text-charcoal-body leading-relaxed">
-            Synthesizing our empirical results into actionable engineering guidance for practitioners,
-            judiciary tech researchers, and edge AI developers.
+          <p className="mt-3 font-sans text-base text-ink-body leading-relaxed">
+            Synthesizing empirical findings into direct engineering guidance for court technologists,
+            legal AI developers, and legal aid institutions.
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-xl border border-border bg-surface p-6 shadow-subtle">
-            <span className="font-mono text-xs font-bold text-accent uppercase tracking-wider block mb-2">
-              1. Recommendation for Edge AI
-            </span>
-            <h3 className="font-serif text-base font-semibold text-charcoal-heading mb-2">
-              Deploy Qwen2.5-0.5B-Instruct
-            </h3>
-            <p className="text-xs text-charcoal-body leading-relaxed">
-              For local desktop legal research, offline advocate notebooks, or self-hosted court assistants,
-              the 0.5B generalist instruction model provides the highest reliability and lowest latency with
-              zero external cloud reliance.
-            </p>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="rounded-xl border border-ink bg-paper-card p-6 shadow-solid flex flex-col justify-between">
+            <div>
+              <span className="font-mono text-xs font-bold text-blueprint uppercase tracking-wider block mb-2">
+                01 // Edge Hardware Recommendation
+              </span>
+              <h3 className="font-sans text-lg font-bold text-ink mb-2">
+                Deploy Qwen2.5-0.5B-Instruct
+              </h3>
+              <p className="font-sans text-xs text-ink-body leading-relaxed">
+                For local advocate laptops, offline legal clinics, or sovereign court kiosks,
+                the 0.5B generalist instruction model offers the highest factual accuracy and lowest latency
+                with zero cloud infrastructure costs or privacy risks.
+              </p>
+            </div>
           </div>
 
-          <div className="rounded-xl border border-border bg-surface p-6 shadow-subtle">
-            <span className="font-mono text-xs font-bold text-accent uppercase tracking-wider block mb-2">
-              2. Specialization Guidance
-            </span>
-            <h3 className="font-serif text-base font-semibold text-charcoal-heading mb-2">
-              Targeted Domain Fine-Tuning
-            </h3>
-            <p className="text-xs text-charcoal-body leading-relaxed">
-              Domain fine-tuning should not be confined strictly to narrow penal acts (e.g. BNS alone).
-              Models require joint training across Constitutional Law, Supreme Court Reports (SCR), and procedural codes
-              to maintain multi-faceted doctrinal reasoning.
-            </p>
+          <div className="rounded-xl border border-ink bg-paper-card p-6 shadow-solid flex flex-col justify-between">
+            <div>
+              <span className="font-mono text-xs font-bold text-safety uppercase tracking-wider block mb-2">
+                02 // Domain Fine-Tuning Guidance
+              </span>
+              <h3 className="font-sans text-lg font-bold text-ink mb-2">
+                Avoid Narrow Statutory Silos
+              </h3>
+              <p className="font-sans text-xs text-ink-body leading-relaxed">
+                Fine-tuning solely on newly enacted penal acts (such as BNS 2023) causes catastrophic forgetting
+                of fundamental rights jurisprudence. Fine-tuning corpora must balance statutory code with
+                75+ years of constitutional landmark judgments.
+              </p>
+            </div>
           </div>
 
-          <div className="rounded-xl border border-border bg-surface p-6 shadow-subtle">
-            <span className="font-mono text-xs font-bold text-accent uppercase tracking-wider block mb-2">
-              3. Future Roadmap
-            </span>
-            <h3 className="font-serif text-base font-semibold text-charcoal-heading mb-2">
-              Hybrid Dense Retrieval (RAG)
-            </h3>
-            <p className="text-xs text-charcoal-body leading-relaxed">
-              Standalone parametric weights cannot memorize 75+ years of Indian Supreme Court jurisprudence.
-              Pairing compact 0.5B SLMs with dense vector retrieval over indexed case judgment corpora represents
-              the definitive next step for accurate citation grounding.
-            </p>
+          <div className="rounded-xl border border-ink bg-paper-card p-6 shadow-solid flex flex-col justify-between">
+            <div>
+              <span className="font-mono text-xs font-bold text-ink uppercase tracking-wider block mb-2">
+                03 // Architectural Roadmap
+              </span>
+              <h3 className="font-sans text-lg font-bold text-ink mb-2">
+                Hybrid Dense Retrieval (RAG)
+              </h3>
+              <p className="font-sans text-xs text-ink-body leading-relaxed">
+                No small language model can store millions of pages of judicial precedent in weights alone.
+                The ultimate architecture is pairing a compact 0.5B SLM with a vector database indexed over
+                official Supreme Court reports (SCR) for verifiable citation grounding.
+              </p>
+            </div>
           </div>
         </div>
       </div>
