@@ -1,0 +1,393 @@
+{
+  "project": {
+    "title": "Comparative Evaluation of SLMs on Indian Legal Data",
+    "subtitle": "Benchmarking Tiny and Small Language Models on Indian Judicial & Constitutional Precedents",
+    "institution": "B.Tech AI & Data Science Capstone Project",
+    "research_question": "How do a tiny Indian legal-domain model, a general-purpose small language model, and an Indian-law-specialized small language model compare when answering questions based on Indian legal/judicial data?",
+    "dataset": "Indian Constitutional Precedents & Supreme Court Judgments (Articles 12, 14, 15, 19, 21)",
+    "evaluation_samples": 50,
+    "timestamp": "2026-10-07 15:13:42 UTC"
+  },
+  "models": [
+    {
+      "id": "model_1",
+      "name": "SmolLM2-135M (Ayn Fallback)",
+      "parameters": 135000000,
+      "param_count": "135M",
+      "metrics": {
+        "exact_match": 0.0,
+        "f1_score": 0.2556,
+        "rouge1": 0.2556,
+        "rouge2": 0.0493,
+        "rougeL": 0.1465,
+        "semantic_similarity": 0.4478,
+        "factuality_proxy": 0.4278,
+        "quality_score": 0.2833,
+        "avg_latency_sec": 6.998,
+        "tokens_per_second": 22.48,
+        "quality_per_b_param": 2.1
+      },
+      "hallucination_distribution": {
+        "low_risk_pct": 12.0,
+        "medium_risk_pct": 40.0,
+        "high_risk_pct": 48.0
+      }
+    },
+    {
+      "id": "model_2",
+      "name": "Qwen2.5-0.5B-Instruct",
+      "parameters": 490000000,
+      "param_count": "490M",
+      "metrics": {
+        "exact_match": 0.0,
+        "f1_score": 0.2998,
+        "rouge1": 0.2998,
+        "rouge2": 0.0959,
+        "rougeL": 0.1861,
+        "semantic_similarity": 0.6211,
+        "factuality_proxy": 0.5618,
+        "quality_score": 0.369,
+        "avg_latency_sec": 5.925,
+        "tokens_per_second": 26.98,
+        "quality_per_b_param": 0.75
+      },
+      "hallucination_distribution": {
+        "low_risk_pct": 28.0,
+        "medium_risk_pct": 56.0,
+        "high_risk_pct": 16.0
+      }
+    },
+    {
+      "id": "model_3",
+      "name": "Indian-Legal-Qwen2.5-1.5B",
+      "parameters": 1540000000,
+      "param_count": "1.54B",
+      "metrics": {
+        "exact_match": 0.0,
+        "f1_score": 0.1,
+        "rouge1": 0.1001,
+        "rouge2": 0.012,
+        "rougeL": 0.0708,
+        "semantic_similarity": 0.307,
+        "factuality_proxy": 0.2339,
+        "quality_score": 0.1593,
+        "avg_latency_sec": 3.059,
+        "tokens_per_second": 21.91,
+        "quality_per_b_param": 0.1
+      },
+      "hallucination_distribution": {
+        "low_risk_pct": 0.0,
+        "medium_risk_pct": 10.0,
+        "high_risk_pct": 90.0
+      }
+    }
+  ],
+  "rankings": [
+    {
+      "rank": 1,
+      "model_id": "model_2",
+      "model_name": "Qwen2.5-0.5B-Instruct",
+      "overall_score": 0.575,
+      "quality_score": 0.369,
+      "factuality_proxy": 0.5618,
+      "throughput_norm": 1.0
+    },
+    {
+      "rank": 2,
+      "model_id": "model_1",
+      "model_name": "SmolLM2-135M (Ayn Fallback)",
+      "overall_score": 0.4569,
+      "quality_score": 0.2833,
+      "factuality_proxy": 0.4278,
+      "throughput_norm": 0.8332
+    },
+    {
+      "rank": 3,
+      "model_id": "model_3",
+      "model_name": "Indian-Legal-Qwen2.5-1.5B",
+      "overall_score": 0.3412,
+      "quality_score": 0.1593,
+      "factuality_proxy": 0.2339,
+      "throughput_norm": 0.8121
+    }
+  ],
+  "examples": [
+    {
+      "category": "Easy Question",
+      "sample_id": 1,
+      "context": "Case Citation: Central Inland Water Transport Corporation Ltd. vs Brojo Nath Ganguly & Anr., 1986 AIR 1571, 1986 SCR (2) 278. The case revolves around the validity of service rule 9(i) allowing termination of permanent employees without assigning any reason under right to equality under Article 14. The Supreme Court upheld the High Court's decision striking down the service rule as unconstitutional.",
+      "question": "Evaluate the balance of individual rights and societal interests in the provided case.",
+      "reference_answer": "In the given case, the Supreme Court of India has struck a balance between individual rights and societal interests. On one hand, the court upheld the individual rights of the employees by ruling that the termination of their services without assigning any reason is arbitrary and violates their right to equality under Article 14 of the Indian Constitution. This decision protected the employees' right to livelihood, which is an integral part of the right to life under Article 21. On the other hand, the court also considered societal interests by recognizing that government companies undertaking public functions qualify as 'State' under Article 12. This implies that such entities have a responsibility to uphold the constitutional rights of citizens, thereby serving societal interests. The court's decision ensures that state agencies comply with principles of natural justice and constitutional provisions even in contractual matters, thereby promoting transparency, accountability, and fairness in public administration. Therefore, the court has effectively balanced individual rights and societal interests in this case.",
+      "responses": {
+        "model_1": "The Supreme Court held that the service rule was constitutional because it did not violate the principle of equal protection or due process by denying a person access to employment on grounds such as race, gender, religion etc.\nConclusion: The court concluded that the service rule is constitutionally valid for all persons irrespective of their statuses.\nDiscussion Questions:\n- What are the key points you take away from this article?\n- How does the Supreme Court approach the issue of affirmative action?\n- Why do you think the Supreme Court has been so adamant about upholding the service rule?",
+        "model_2": "The case cited is Central Inland Water Transport Corporation Ltd. v. Brojo Nath Ganguly & Anr., where the Supreme Court upheld a provision that allows for terminating permanent employees without giving them notice or providing reasons for such terminations under Article 14 of the Constitution. This provision was struck down by the High Court on the grounds that it violated the principle of equality before the law, which is enshrined in Article 14(1).\n\nIn evaluating this case from a legal perspective, we must consider both the individual rights of the employees and the broader societal interest at stake. Here’s how we can analyze these aspects:\n\n### Individual Rights:\n- **Right to Equality Under Article 14**: Article 14 guarantees fundamental human rights including freedom from discrimination based on caste, race",
+        "model_3": "The court acknowledges that \"the fundamental right is absolute\" but finds it outweighed by the state interest in maintaining administrative stability for public servants who have been loyal to their posts over decades. [Source: Section 300, BNSS]"
+      },
+      "scores": {
+        "model_1": {
+          "f1": 0.2443,
+          "rougeL": 0.1679,
+          "semantic_similarity": 0.5423,
+          "factuality_proxy": 0.4212,
+          "hallucination_risk": "Medium risk"
+        },
+        "model_2": {
+          "f1": 0.381,
+          "rougeL": 0.2041,
+          "semantic_similarity": 0.635,
+          "factuality_proxy": 0.6175,
+          "hallucination_risk": "Medium risk"
+        },
+        "model_3": {
+          "f1": 0.1379,
+          "rougeL": 0.1084,
+          "semantic_similarity": 0.5106,
+          "factuality_proxy": 0.3553,
+          "hallucination_risk": "High risk"
+        }
+      }
+    },
+    {
+      "category": "Medium Question",
+      "sample_id": 2,
+      "context": "Ratilal Panachand Gandhi vs The State Of Bombay And Others (1954)",
+      "question": "Identify and explain the articles of the Indian Constitution applicable to the provided case.",
+      "reference_answer": "The case Ratilal Panachand Gandhi vs The State Of Bombay And Others (1954) involves the interpretation and application of certain articles of the Indian Constitution. The relevant articles in this case are:\n\n1) Article 25: This article guarantees the freedom of religion to all individuals in India. It ensures that every person has the right to freely profess, practice, and propagate their religion.\n\n2) Article 26: This article provides the freedom to manage religious affairs. It grants religious denominations or any section thereof the right to establish and maintain institutions for religious and charitable purposes, and to manage their own affairs in matters of religion.\n\n3) Article 132(1): This article grants the Supreme Court of India the power to hear and decide appeals from any judgment, decree, or final order of a High Court in the territory of India, whether in a civil, criminal, or other proceeding.\n\nThese articles are crucial in determining the constitutionality of the provisions of the Bombay Public Trusts Act, 1950 and in safeguarding the fundamental rights of individuals and religious institutions involved in the case.",
+      "responses": {
+        "model_1": "The Supreme Court has held that Article 26(3)(a), which provides for the right to life, is a valid article in India’s constitution as it was enacted by the Parliament at the time when the Constitution came into force on 26th January 1950. It also holds that Article 27(8) does not apply under the provisions of the Constitution because it did not come into effect until after the enactment of the Constitution.\nIn this regard, the Supreme Court has stated that “the provision of Article 26(3)(b) relating to the protection against torture or cruel treatment shall be construed to include all forms of inhuman and degrading treatment.”\nThis means that Article 26(3)(b) applies only where there are no",
+        "model_2": "The article of the Indian Constitution that applies to this case is Article 370, which deals with the partition of Bengal under British rule. This provision was part of the Partition Act of 1906, enacted by the British government after the First World War. It established a new state called Jharkhand as a separate administrative division from Bihar, Bengal, and Orissa.\n\nIn the context of Ratilal Panachand Gandhi's case against the State of Bombay and others, the key points regarding Articles 370 and its application would be:\n\n1. **Partition of Bengal**: The first paragraph of Article 370 states that \"the said State shall not be divided into two or more parts.\" This means that if the state of Bengal were to be split up",
+        "model_3": "The court applies Articles 238-240 of the Constitution, which governs \"Appeals from decisions of High Courts,\" specifically focusing on sub-section (1) for criminal appeals and sub-section (2) for civil/property disputes. [Source: Section 427, BNSS 2023]"
+      },
+      "scores": {
+        "model_1": {
+          "f1": 0.3268,
+          "rougeL": 0.1503,
+          "semantic_similarity": 0.4845,
+          "factuality_proxy": 0.4645,
+          "hallucination_risk": "Medium risk"
+        },
+        "model_2": {
+          "f1": 0.3464,
+          "rougeL": 0.183,
+          "semantic_similarity": 0.5142,
+          "factuality_proxy": 0.4238,
+          "hallucination_risk": "Medium risk"
+        },
+        "model_3": {
+          "f1": 0.1545,
+          "rougeL": 0.1,
+          "semantic_similarity": 0.3486,
+          "factuality_proxy": 0.2854,
+          "hallucination_risk": "High risk"
+        }
+      }
+    },
+    {
+      "category": "Difficult Question",
+      "sample_id": 3,
+      "context": "The case K. S. Ramamurthi Reddiar vs The Chief Commissioner, Pondicherry & Anr., AIR 1963 SC 1464, Supreme Court of India",
+      "question": "Discuss the potential implications of the given case for Indian family law.",
+      "reference_answer": "The case of K. S. Ramamurthi Reddiar vs The Chief Commissioner, Pondicherry & Anr. has limited implications for Indian family law as it primarily deals with constitutional law and the interpretation of Article 12 of the Constitution. However, there are a few potential implications that can be derived from the case.\n\nFirstly, the case highlights the importance of clear and precise definitions in the interpretation of constitutional provisions. In this case, the interpretation of the phrase 'under the control of the Government of India' in Article 12 was crucial in determining the jurisdiction of the Chief Commissioner of Pondicherry. This emphasis on precise definitions can also be relevant in family law, where the interpretation of terms such as 'marriage', 'divorce', 'custody', and 'maintenance' can have significant implications for individuals and families.\n\nSecondly, the case underscores the principle of separation of powers and the independence of judicial and quasi-judicial authorities. The Supreme Court held that judicial and quasi-judicial authorities outside the territory of India cannot be considered 'under the control of the Government of India' for the purpose of Article 12. This principle of independence can also be applicable in family law, where the judiciary plays a crucial role in resolving disputes related to marriage, divorce, child custody, and other family matters.\n\nLastly, the case highlights the importance of prospective application of the Constitution. The Supreme Court held that no writ can be issued under Article 32 concerning acts done before an area became part of the territory of India. This principle of prospective application can be relevant in family law cases where the interpretation and application of laws should be based on the current legal framework and not retrospective in nature.\n\nOverall, while the case of K. S. Ramamurthi Reddiar vs The Chief Commissioner, Pondicherry & Anr. may not have direct implications for Indian family law, it emphasizes the need for clear definitions, the independence of judicial authorities, and the prospective application of laws, which can be relevant in the context of family law as well.",
+      "responses": {
+        "model_1": "The decision in this case is a landmark decision that has had an enormous impact on the legal system across India. It was decided by the Supreme Court of India which held that the right to privacy under Article 25(a) cannot be infringed upon if it does not infringe upon other rights such as freedom of speech or expression. This means that even though the court did not explicitly say so, there are certain restrictions placed on individuals’ ability to express their views through media outlets like television channels etc. In fact, the ruling states that “the government may restrict access to information only when its interests outweigh those of others”.\nThis ruling also highlights the importance of respecting individual freedoms while dealing with issues related to family matters especially regarding children who have been affected due to divorce proceedings involving them.",
+        "model_2": "The case K. S. Ramamurthi Reddiar v The Chief Commissioner, Pondicherry & Anr., AIR 1963 SC 1464 is a landmark decision that has significant implications for Indian family law. This case highlights several key points:\n\n1. **Recognition of Family Law**: The court held that under Section 25(1) of the Constitution, all citizens have equal rights to marry and divorce within their own country. This means that individuals can choose whether or not they want to maintain their marriage and decide on the dissolution of it if necessary.\n\n2. **Right to Marry**: The court ruled that every citizen has the right to marry without any discrimination based on race, religion, caste, gender, place of birth, etc. This",
+        "model_3": "Under sub-section (2), if a husband dies while living with his wife but before obtaining a decree of divorce from her, \"the provisions herein contained shall apply to such person as if he had been declared dead.\" [Source: Section 105, BNSS 2023]"
+      },
+      "scores": {
+        "model_1": {
+          "f1": 0.263,
+          "rougeL": 0.1211,
+          "semantic_similarity": 0.5899,
+          "factuality_proxy": 0.6949,
+          "hallucination_risk": "Low risk"
+        },
+        "model_2": {
+          "f1": 0.2478,
+          "rougeL": 0.1903,
+          "semantic_similarity": 0.7506,
+          "factuality_proxy": 0.6753,
+          "hallucination_risk": "Low risk"
+        },
+        "model_3": {
+          "f1": 0.0739,
+          "rougeL": 0.0369,
+          "semantic_similarity": 0.27,
+          "factuality_proxy": 0.135,
+          "hallucination_risk": "High risk"
+        }
+      }
+    },
+    {
+      "category": "Divergence Case",
+      "sample_id": 43,
+      "context": "The case Sunil Batra v. Delhi Administration (1979), (1980) 3 SCC 488, Supreme Court of India",
+      "question": "Discuss the impact of the provided case on personal data protection laws in India.",
+      "reference_answer": "The case Sunil Batra v. Delhi Administration (1979) primarily focused on the rights of prisoners and the need for prison reforms. Therefore, it does not directly impact personal data protection laws in India. However, the case does highlight the importance of protecting fundamental rights, including the right to privacy, which is a crucial aspect of personal data protection. The Supreme Court's emphasis on the humane treatment of prisoners and the need for judicial oversight over prison administration can be seen as a broader reflection of the court's commitment to protecting individual rights, including the right to privacy. This commitment to safeguarding fundamental rights can indirectly influence the interpretation and development of personal data protection laws in India, as the courts may draw upon the principles established in cases like Sunil Batra to ensure the protection of personal data and privacy rights in the digital age. It is important to note that personal data protection laws in India are primarily governed by the Personal Data Protection Bill, 2019, which is currently under consideration by the Indian Parliament. The impact of the Sunil Batra case on personal data protection laws would be more indirect and contextual, as it contributes to the broader jurisprudential framework of protecting individual rights and ensuring the dignity and privacy of individuals.",
+      "responses": {
+        "model_1": "The decision is based upon the following legal principles:\n\n1. The law should be applied to all cases;\n2. The law must not discriminate against any person or group by providing a different set of rules for different groups/classes of people;\n3. The law cannot provide an exception that would allow one class of persons to have access only to certain types of information while others are denied access altogether;\n4. The law does not give special privileges to some classes over other classes without giving them equal rights under it;\n5. The law requires courts to apply their own standards when deciding whether there has been discrimination between two parties because they may differ from each other’s standard of conduct as laid down in the applicable law;\n6. The law provides no remedy if such discrimination occurs",
+        "model_2": "Sunil Batra v. Delhi Administration is a landmark judgment that has had significant implications for personal data protection laws in India. The key points to consider include:\n\n1. **Personal Data Protection Act**: This act was enacted by the Indian government in 2006 with the aim of protecting individuals' privacy rights against unauthorized access or disclosure of their personal information. It includes provisions related to the collection, use, storage, transmission, and disposal of personal data.\n\n2. **Court's Decision**: In this case, the court held that the Personal Data Protection Act does not apply to the processing of data collected from citizens under Article 14(1)(a). This ruling means that any data collected through electronic means without explicit consent would fall outside the scope of the act.\n\n3. **Impact",
+        "model_3": "Under sub-section (2)(a), \"personal information\" includes details about a person's name, address, telephone number, email ID, or any other identifying particulars. [Source: Section 65, BNS]"
+      },
+      "scores": {
+        "model_1": {
+          "f1": 0.2303,
+          "rougeL": 0.118,
+          "semantic_similarity": 0.376,
+          "factuality_proxy": 0.313,
+          "hallucination_risk": "High risk"
+        },
+        "model_2": {
+          "f1": 0.371,
+          "rougeL": 0.2551,
+          "semantic_similarity": 0.8618,
+          "factuality_proxy": 0.6809,
+          "hallucination_risk": "Low risk"
+        },
+        "model_3": {
+          "f1": 0.041,
+          "rougeL": 0.0328,
+          "semantic_similarity": 0.3196,
+          "factuality_proxy": 0.1598,
+          "hallucination_risk": "High risk"
+        }
+      }
+    },
+    {
+      "category": "Consensus Case",
+      "sample_id": 19,
+      "context": "Olga Tellis & Ors vs Bombay Municipal Corporation & Ors (1985)",
+      "question": "Draft a hypothetical dissenting opinion for the provided case.",
+      "reference_answer": "In the case of Olga Tellis & Ors vs Bombay Municipal Corporation & Ors, I respectfully dissent from the majority opinion. While I acknowledge the importance of protecting the fundamental rights of pavement dwellers, I believe that the eviction without notice is a necessary measure to maintain public order and ensure the proper use of public property.\n\nFirstly, it is crucial to recognize that the right to livelihood, although an important aspect of the right to life, cannot be absolute. The State has a legitimate interest in regulating the use of public spaces and preventing encroachments. Pavement dwellers, by their very nature, occupy public property without authorization, which hampers the smooth functioning of the city and poses risks to public safety.\n\nSecondly, the argument that pavement dwellers are forced to migrate to cities due to poverty and lack of rural jobs does not justify their unauthorized occupation of public spaces. While it is indeed a matter of concern that rural areas may lack sufficient employment opportunities, it is not the responsibility of the State to accommodate all individuals who choose to migrate to cities. The State should focus on addressing the root causes of rural poverty and creating sustainable livelihood options in rural areas.\n\nFurthermore, the majority's reliance on Article 21 to protect the right to livelihood is misplaced. Article 21 primarily safeguards the right to life and personal liberty against arbitrary deprivation by the State. It does not confer an absolute right to occupy public spaces without authorization. The State has the authority to regulate the use of public property in the interest of the general public.\n\nLastly, the majority's assertion that eviction without notice violates principles of natural justice is flawed. The provision in question, Section 314 of the Bombay Municipal Corporation Act, allows for summary eviction of encroachments. This provision is a reasonable measure to swiftly address encroachments and prevent further unauthorized occupation of public spaces. The requirement of notice would only delay the eviction process and potentially lead to further encroachments.\n\nIn conclusion, while I sympathize with the plight of pavement dwellers, I believe that eviction without notice is a necessary measure to maintain public order and protect public property. The State has a legitimate interest in regulating the use of public spaces, and unauthorized occupation cannot be condoned. Therefore, I respectfully dissent from the majority opinion and uphold the validity of eviction without notice in this case.",
+      "responses": {
+        "model_1": "The court will consider whether or not to grant certiorari on the following grounds:\n\n1. The petitioner is entitled to appeal from the judgment of the court, which was rendered in 2003;\n\n2. The petitioner has been represented by counsel who have filed an application with the court under section 74(b)(ii), and\n\n3. The petitioner's request that the court be informed about the merits of his motion before it can proceed further.\n\nIn this particular case, the petitioner had argued that the court should issue a writ of certiorari because he did not receive any notice as to the fact that the court would hear his motion at the time of its issuance. The court held that the petitioner could file a motion within two",
+        "model_2": "### Hypothetical Dissenting Opinion\n\n**Hypothetical Dissenting Opinion**\n\nIn this case, we have two parties involved - the plaintiff, Olga Tellis, who is seeking to challenge the constitutionality of the Bombay Municipal Corporation's decision to grant her a permanent residence permit under Section 34(2) of the Constitution. The primary issue before us is whether the municipal corporation has the authority to grant such a permit without prior notification or approval from the state government.\n\nThe dissenting opinion argues that the municipal corporation lacks sufficient jurisdiction to make such decisions. It contends that the municipal corporation does not possess the necessary powers to exercise its functions within the context of the Constitution. Specifically, it points out that the municipal corporation is merely a local administrative body with limited autonomy compared to the central",
+        "model_3": "The majority rules that under sub-section (2), \"the right to be excused\" is absolute; it cannot be denied based on whether they have already paid or will pay. The dissent argues this section creates a statutory exception allowing denial if payment was due but unpaid at the time of application, which aligns with ordinary fairness and public policy against forcing people who owe money into court just because their debtors want them there. [Source: Dissenting Opinion by Justice Chandrachud]"
+      },
+      "scores": {
+        "model_1": {
+          "f1": 0.2038,
+          "rougeL": 0.1283,
+          "semantic_similarity": 0.2175,
+          "factuality_proxy": 0.1087,
+          "hallucination_risk": "High risk"
+        },
+        "model_2": {
+          "f1": 0.2289,
+          "rougeL": 0.1501,
+          "semantic_similarity": 0.53,
+          "factuality_proxy": 0.3206,
+          "hallucination_risk": "High risk"
+        },
+        "model_3": {
+          "f1": 0.1286,
+          "rougeL": 0.0788,
+          "semantic_similarity": 0.1754,
+          "factuality_proxy": 0.1433,
+          "hallucination_risk": "High risk"
+        }
+      }
+    },
+    {
+      "category": "Hallucination / Low Fidelity Case",
+      "sample_id": 49,
+      "context": "R. Rajagopal vs State Of T.N, (1994) 6 SCC 632",
+      "question": "Discuss potential legislative responses to the decision in the given case.",
+      "reference_answer": "The decision in the case of R. Rajagopal vs State Of T.N. has significant implications for the right to privacy and freedom of the press. In light of this decision, there are several potential legislative responses that could be considered:\n\n1. Privacy Protection Legislation: The legislature can enact comprehensive privacy protection laws that clearly define the scope of the right to privacy and establish safeguards against its infringement. These laws can provide individuals with legal remedies and mechanisms to seek redress in case of privacy violations.\n\n2. Data Protection Laws: The legislature can introduce robust data protection laws that regulate the collection, storage, and processing of personal data. These laws can ensure that individuals have control over their personal information and establish penalties for unauthorized access or misuse of data.\n\n3. Press Regulation: The legislature can consider enacting laws or regulations that strike a balance between the right to privacy and freedom of the press. These laws can provide guidelines for responsible journalism and establish mechanisms for addressing privacy concerns arising from media reporting.\n\n4. Whistleblower Protection: In order to encourage transparency and accountability, the legislature can strengthen whistleblower protection laws. These laws can provide legal safeguards for individuals who expose wrongdoing or illegal activities, while also ensuring that their privacy is protected.\n\n5. Review of Defamation Laws: The legislature can review defamation laws to ensure that they strike a balance between protecting reputation and safeguarding freedom of expression. This can include reevaluating criminal defamation provisions and promoting alternative mechanisms for resolving defamation disputes.\n\n6. Strengthening Data Breach Notification: The legislature can introduce or strengthen laws that require organizations to notify individuals in the event of a data breach. This can enhance transparency and enable individuals to take necessary steps to protect their privacy.\n\nThese potential legislative responses aim to address the concerns raised by the R. Rajagopal case and provide a framework for protecting privacy rights while upholding freedom of the press and other fundamental rights. It is important for the legislature to carefully consider these options and strike a balance that respects individual privacy while also promoting public interest and democratic values.",
+      "responses": {
+        "model_1": "The court held that the state of TN had a right under the constitution to regulate the activities of its citizens through the use of police powers as provided for by the constitution. The court also noted that the government could not restrict the freedom of speech or expression without due process of law. It further stated that the legislature cannot pass any legislation which would infringe upon the rights guaranteed under the constitution because it is an act of the people themselves who are responsible for their own actions.\nRajgopalachari vs. State of T., (1875) 1 SCC 109\nLaw & Justice:\nIn this case, the court found that the state of TN was entitled to exercise power over the media outlets such as television stations, radio stations etc. In order to protect",
+        "model_2": "The case cited is R. Rajagopal v State of Tamil Nadu, where the Supreme Court ruled that a state cannot impose a ban on the sale or purchase of certain types of alcoholic beverages unless it has obtained prior consent from the Central Government through a statutory instrument. This ruling was significant as it challenged the power of states to regulate alcohol sales within their borders without explicit authorization from the central government.\n\nIn response to this decision, several legislative measures have been proposed by various states and the Union Territory of Chennai:\n\n1. **Amendment to the Drinking Alcohol Act**: Several states have introduced amendments to the Drinking Alcohol Act, which allows for the sale of alcoholic beverages only if they meet specific criteria set out in the act. These amendments aim to ensure that all alcohol sold within the state complies with the necessary",
+        "model_3": "The High Court's judgment is legally sound as it strictly applies Section 507(1)(b), which explicitly states that \"no person shall be deemed a deserter who has been declared by competent authority... to have deserted.\" [Source: Section 507, BNSS 2023]"
+      },
+      "scores": {
+        "model_1": {
+          "f1": 0.2669,
+          "rougeL": 0.1396,
+          "semantic_similarity": 0.4722,
+          "factuality_proxy": 0.6111,
+          "hallucination_risk": "Medium risk"
+        },
+        "model_2": {
+          "f1": 0.236,
+          "rougeL": 0.136,
+          "semantic_similarity": 0.4537,
+          "factuality_proxy": 0.3518,
+          "hallucination_risk": "High risk"
+        },
+        "model_3": {
+          "f1": 0.0605,
+          "rougeL": 0.0353,
+          "semantic_similarity": 0.0622,
+          "factuality_proxy": 0.0311,
+          "hallucination_risk": "High risk"
+        }
+      }
+    },
+    {
+      "category": "Domain Specialization Showcase",
+      "sample_id": 36,
+      "context": "Case: Unni Krishnan, J.P. and Ors. vs State of Andhra Pradesh and Ors.",
+      "question": "Formulate a potential public interest litigation based on the given case.",
+      "reference_answer": "Potential Public Interest Litigation: Petition against exorbitant fees and discriminatory admission practices in private educational institutions. \n\nUsing the principles established in the Unni Krishnan case, a public interest litigation could be initiated against private educational institutions that are allegedly charging exorbitant fees and adopting discriminatory admission practices. The petition could argue that such practices violate the right to education as affirmed in the Unni Krishnan case. The petitioners could request the court to enforce the guidelines set out in this case and direct the relevant authorities to take necessary actions against such institutions. It could also seek directions for the establishment of a regulatory body to regularly monitor and ensure compliance with these guidelines.",
+      "responses": {
+        "model_1": "The court will consider whether there is any evidence that the plaintiff has been injured by the defendant’s negligence or misconduct in the conduct of business activities under the provisions of the Act. The court may also look at other factors such as the nature of the contract between the parties to determine if it was properly executed. If the court finds that there are no reasonable grounds for concluding that the plaintiff suffered injury from the defendant’s actions then the court would not find fault with the plaintiff but instead conclude that the plaintiff did suffer harm due to the defendant’s negligent behavior.\nIn this particular case, the court found that there were some facts which could be used against the plaintiff because they had an effect upon his right to sue the state government. For instance, the court concluded that the plaintiff lacked standing",
+        "model_2": "To formulate a potential public interest litigation based on the provided case, we need to consider several key elements such as the nature of the issue, the parties involved, and the specific context within which it arises. The case involves Unni Krishnan v. State of Andhra Pradesh and others, where the court is considering whether there has been a violation of fundamental rights under Article 19(2)(a) of the Constitution of India.\n\n### Potential Public Interest Litigation:\n\n#### 1. **Nature of the Issue:**\nThe core issue at hand revolves around the constitutionality of laws passed by the state government that restrict or limit certain freedoms, including freedom of speech and expression, due process, and other basic human rights. This includes cases like the one before us involving the restriction of freedom of",
+        "model_3": "The court holds that under sub-section (1), \"any person\" has standing to challenge the legality of any order made by the High Court or Sessions Judge regarding the disposal of property seized for offences against the state. [Source: Section 50, BNSS 2023]"
+      },
+      "scores": {
+        "model_1": {
+          "f1": 0.251,
+          "rougeL": 0.1521,
+          "semantic_similarity": 0.3,
+          "factuality_proxy": 0.65,
+          "hallucination_risk": "Low risk"
+        },
+        "model_2": {
+          "f1": 0.2939,
+          "rougeL": 0.1714,
+          "semantic_similarity": 0.6278,
+          "factuality_proxy": 0.8139,
+          "hallucination_risk": "Low risk"
+        },
+        "model_3": {
+          "f1": 0.1401,
+          "rougeL": 0.1146,
+          "semantic_similarity": 0.2475,
+          "factuality_proxy": 0.6238,
+          "hallucination_risk": "Medium risk"
+        }
+      }
+    }
+  ],
+  "charts": [
+    {
+      "id": "f1_comparison",
+      "title": "Token F1 Score Comparison",
+      "filename": "charts/f1_comparison.png"
+    },
+    {
+      "id": "rouge_comparison",
+      "title": "ROUGE Spectrum Analysis",
+      "filename": "charts/rouge_comparison.png"
+    },
+    {
+      "id": "latency_comparison",
+      "title": "Inference Latency vs. Throughput",
+      "filename": "charts/latency_comparison.png"
+    },
+    {
+      "id": "parameter_comparison",
+      "title": "Parameter Footprint",
+      "filename": "charts/parameter_comparison.png"
+    },
+    {
+      "id": "quality_vs_parameters",
+      "title": "Quality vs. Parameter Count",
+      "filename": "charts/quality_vs_parameters.png"
+    },
+    {
+      "id": "quality_vs_latency",
+      "title": "Quality vs. Latency Trade-off",
+      "filename": "charts/quality_vs_latency.png"
+    }
+  ]
+}

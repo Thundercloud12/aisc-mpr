@@ -1,0 +1,27 @@
+# Python
+backend/venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.ipynb_checkpoints/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

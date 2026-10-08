@@ -1,0 +1,18 @@
+{
+  "seed": 42,
+  "device": "cuda",
+  "dtype": "bfloat16",
+  "max_eval_samples": 50,
+  "generation_parameters": {
+    "max_new_tokens": 160,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "repetition_penalty": 1.15,
+    "do_sample": true
+  },
+  "evaluated_models": [
+    "HuggingFaceTB/SmolLM2-135M",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "GSMS-B/Indian-Legal-Qwen2.5-1.5B"
+  ]
+}

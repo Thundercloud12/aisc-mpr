@@ -1,0 +1,4 @@
+Model Key,Display Name,HuggingFace ID,Parameters,Param Count,Type,Domain,Instruction Tuned,Architecture,Hidden Size,Layers,Vocab Size,Precision,Compute Device
+model_1,SmolLM2-135M (Ayn Fallback),HuggingFaceTB/SmolLM2-135M,135000000,135M,Base Causal LM (Pretrained),General Pretrained Foundation,No (Base Model),LlamaForCausalLM,576,30,49152,bfloat16,cuda
+model_2,Qwen2.5-0.5B-Instruct,Qwen/Qwen2.5-0.5B-Instruct,490000000,490M,Instruction-Tuned SLM,General Purpose,Yes,Qwen2ForCausalLM,896,24,151936,bfloat16,cuda
+model_3,Indian-Legal-Qwen2.5-1.5B,GSMS-B/Indian-Legal-Qwen2.5-1.5B,1540000000,1.54B,Domain Fine-Tuned SLM,Indian Legal Specialized,Yes,Qwen2ForCausalLM,1536,28,151936,bfloat16,cuda
